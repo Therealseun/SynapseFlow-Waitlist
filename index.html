@@ -4,19 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SynapseFlow — Join the Waitlist</title>
-  
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
-  
-  <!-- Supabase client library -->
+  <!-- Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  
-  <!-- EmailJS (loaded synchronously to avoid tracking prevention issues) -->
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  
+  <!-- EmailJS (loaded synchronously) -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <style>
-    /* ========== CSS RESET & VARIABLES ========== */
+    /* ---------- RESET & VARIABLES ---------- */
     *, *::after, *::before {
       box-sizing: border-box;
       margin: 0;
@@ -49,12 +45,11 @@
       overflow-x: hidden;
     }
 
-    /* ========== CUSTOM CURSOR ========== */
+    /* ---------- CUSTOM CURSOR ---------- */
     @media (hover: hover) and (pointer: fine) {
       body {
         cursor: none;
       }
-      
       .cursor {
         position: fixed;
         width: 12px;
@@ -67,7 +62,6 @@
         transition: transform 0.1s, width 0.2s, height 0.2s, background 0.2s;
         mix-blend-mode: multiply;
       }
-      
       .cursor-ring {
         position: fixed;
         width: 36px;
@@ -80,20 +74,18 @@
         transition: transform 0.18s, width 0.2s, height 0.2s;
         opacity: 0.5;
       }
-      
       .cursor.hover {
         width: 20px;
         height: 20px;
         background: var(--amber);
       }
-      
       .cursor-ring.hover {
         width: 52px;
         height: 52px;
       }
     }
 
-    /* ========== NOISE OVERLAY ========== */
+    /* ---------- NOISE OVERLAY ---------- */
     body::before {
       content: '';
       position: fixed;
@@ -104,7 +96,7 @@
       opacity: 0.6;
     }
 
-    /* ========== NAVIGATION ========== */
+    /* ---------- NAVIGATION ---------- */
     nav {
       position: fixed;
       top: 0;
@@ -178,7 +170,7 @@
       transform: translateY(-1px);
     }
 
-    /* ========== HERO SECTION ========== */
+    /* ---------- HERO SECTION ---------- */
     .hero {
       min-height: 100vh;
       display: grid;
@@ -188,7 +180,6 @@
       overflow: hidden;
     }
 
-    /* Animated Orbs */
     .orb {
       position: absolute;
       border-radius: 50%;
@@ -311,7 +302,7 @@
       animation: fadeUp 0.8s 0.3s both;
     }
 
-    /* ========== WAITLIST FORM ========== */
+    /* ---------- WAITLIST FORM ---------- */
     .waitlist-form-wrap {
       animation: fadeUp 0.8s 0.4s both;
     }
@@ -427,7 +418,7 @@
       flex-shrink: 0;
     }
 
-    /* ========== SUCCESS MESSAGE ========== */
+    /* ---------- SUCCESS MESSAGE ---------- */
     .success-msg {
       display: none;
       background: rgba(61, 107, 94, 0.08);
@@ -468,7 +459,7 @@
       margin-top: 12px;
     }
 
-    /* ========== SOCIAL PROOF ========== */
+    /* ---------- SOCIAL PROOF ---------- */
     .social-proof {
       display: flex;
       align-items: center;
@@ -499,11 +490,25 @@
       margin-left: 0;
     }
 
-    .av-1 { background: #4a9080; }
-    .av-2 { background: #7b6ea3; }
-    .av-3 { background: #c4824a; }
-    .av-4 { background: #4a7a9b; }
-    .av-5 { background: #8a6e4a; }
+    .av-1 {
+      background: #4a9080;
+    }
+
+    .av-2 {
+      background: #7b6ea3;
+    }
+
+    .av-3 {
+      background: #c4824a;
+    }
+
+    .av-4 {
+      background: #4a7a9b;
+    }
+
+    .av-5 {
+      background: #8a6e4a;
+    }
 
     .proof-text {
       font-size: 0.8rem;
@@ -515,7 +520,7 @@
       font-weight: 500;
     }
 
-    /* ========== HERO RIGHT (PHONE MOCKUP) ========== */
+    /* ---------- HERO RIGHT (PHONE MOCKUP) ---------- */
     .hero-right {
       position: relative;
       display: flex;
@@ -691,7 +696,7 @@
       margin-top: 2px;
     }
 
-    /* ========== FLOATING CARDS ========== */
+    /* ---------- FLOATING CARDS ---------- */
     .float-card {
       position: absolute;
       background: #fff;
@@ -754,7 +759,7 @@
       margin-top: 4px;
     }
 
-    /* ========== FEATURES SECTION ========== */
+    /* ---------- FEATURES SECTION ---------- */
     .section-features {
       padding: 120px 80px;
       background: var(--ink);
@@ -903,7 +908,7 @@
       letter-spacing: 0.05em;
     }
 
-    /* ========== DISCIPLINES SECTION ========== */
+    /* ---------- DISCIPLINES SECTION ---------- */
     .section-disciplines {
       padding: 120px 80px;
       background: var(--cream);
@@ -960,7 +965,7 @@
       border-radius: 100px;
     }
 
-    /* ========== STATS SECTION ========== */
+    /* ---------- STATS SECTION ---------- */
     .section-stats {
       padding: 80px;
       background: var(--sage);
@@ -995,7 +1000,7 @@
       font-weight: 300;
     }
 
-    /* ========== TIMELINE SECTION ========== */
+    /* ---------- TIMELINE SECTION ---------- */
     .section-timeline {
       padding: 120px 80px;
       background: var(--paper);
@@ -1076,7 +1081,7 @@
       font-weight: 300;
     }
 
-    /* ========== FINAL CTA SECTION ========== */
+    /* ---------- FINAL CTA SECTION ---------- */
     .section-final-cta {
       background: var(--ink);
       color: #fff;
@@ -1172,7 +1177,7 @@
       background: var(--sage-light);
     }
 
-    /* ========== FOOTER ========== */
+    /* ---------- FOOTER ---------- */
     footer {
       background: var(--ink);
       border-top: 1px solid rgba(255, 255, 255, 0.06);
@@ -1216,7 +1221,7 @@
       color: rgba(255, 255, 255, 0.2);
     }
 
-    /* ========== MARQUEE ========== */
+    /* ---------- MARQUEE ---------- */
     .platforms-marquee-wrap {
       overflow: hidden;
       background: var(--cream);
@@ -1260,7 +1265,7 @@
       font-size: 1rem;
     }
 
-    /* ========== ANIMATIONS ========== */
+    /* ---------- ANIMATIONS ---------- */
     @keyframes fadeUp {
       0% {
         opacity: 0;
@@ -1276,7 +1281,7 @@
       display: inline-block;
     }
 
-    /* ========== MOBILE RESPONSIVE ========== */
+    /* ---------- MOBILE RESPONSIVE ---------- */
     @media (max-width: 768px) {
       nav {
         padding: 16px 24px;
@@ -1336,7 +1341,7 @@
       }
     }
 
-    /* ========== SCROLL REVEAL ========== */
+    /* ---------- SCROLL REVEAL ---------- */
     .reveal {
       opacity: 0;
       transform: translateY(30px);
@@ -1377,13 +1382,13 @@
         <div class="eyebrow-dot"></div>
         Now accepting early access
       </div>
-      
+
       <h1 class="hero-headline">
         Own Your<br>
         <span class="line-accent">Digital</span>
         <span class="line-outline">Habits.</span>
       </h1>
-      
+
       <p class="hero-sub">
         SynapseFlow tracks your time across LinkedIn, TikTok, Instagram, X, WhatsApp and more — then turns raw data into career-aligned productivity intelligence. Built for students and professionals who want to stay sharp.
       </p>
@@ -1394,9 +1399,9 @@
             <input class="form-input" type="text" placeholder="First name" required id="fname">
             <input class="form-input" type="text" placeholder="Last name" required id="lname">
           </div>
-          
+
           <input class="form-input" type="email" placeholder="Email address" required id="email">
-          
+
           <select class="form-select form-input" required id="discipline">
             <option value="" disabled selected>Your field of study / career</option>
             <option>Law</option>
@@ -1408,7 +1413,7 @@
             <option>Marketing & Communications</option>
             <option>Other</option>
           </select>
-          
+
           <select class="form-select form-input" required id="platform-focus">
             <option value="" disabled selected>Primary platform you want to manage</option>
             <option>LinkedIn</option>
@@ -1419,23 +1424,23 @@
             <option>Facebook</option>
             <option>All of them</option>
           </select>
-          
+
           <button type="submit" class="submit-btn" id="main-btn">
             <span>Reserve My Spot</span>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
           </button>
-          
+
           <div class="form-note">
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-              <path d="M6 1a3.5 3.5 0 0 1 3.5 3.5V6H8.5V4.5a2.5 2.5 0 0 0-5 0V6H2.5V4.5A3.5 3.5 0 0 1 6 1Z" fill="currentColor" opacity=".4"/>
-              <rect x="1" y="5.5" width="10" height="5.5" rx="1.5" fill="currentColor" opacity=".4"/>
+              <path d="M6 1a3.5 3.5 0 0 1 3.5 3.5V6H8.5V4.5a2.5 2.5 0 0 0-5 0V6H2.5V4.5A3.5 3.5 0 0 1 6 1Z" fill="currentColor" opacity=".4" />
+              <rect x="1" y="5.5" width="10" height="5.5" rx="1.5" fill="currentColor" opacity=".4" />
             </svg>
             No spam, ever. Unsubscribe anytime.
           </div>
         </form>
-        
+
         <div class="success-msg" id="main-success">
           <div class="success-icon">🎉</div>
           <div class="success-title">You're on the list!</div>
@@ -1467,10 +1472,10 @@
               <div class="app-logo-sm">Synapse<em>Flow</em></div>
               <div class="app-time" id="app-clock">9:41</div>
             </div>
-            
+
             <div class="app-greeting">Good morning, Daniel</div>
             <div class="app-today">Today's usage</div>
-            
+
             <div class="mini-platform">
               <div class="mini-icon" style="background:#0077b5">in</div>
               <div class="mini-bar-wrap">
@@ -1479,7 +1484,7 @@
               </div>
               <div class="mini-time">42m</div>
             </div>
-            
+
             <div class="mini-platform">
               <div class="mini-icon" style="background:#e1306c">▶</div>
               <div class="mini-bar-wrap">
@@ -1488,7 +1493,7 @@
               </div>
               <div class="mini-time">1h 34m</div>
             </div>
-            
+
             <div class="mini-platform">
               <div class="mini-icon" style="background:#010101">♪</div>
               <div class="mini-bar-wrap">
@@ -1497,7 +1502,7 @@
               </div>
               <div class="mini-time">2h 12m</div>
             </div>
-            
+
             <div class="mini-platform">
               <div class="mini-icon" style="background:#1da1f2">𝕏</div>
               <div class="mini-bar-wrap">
@@ -1506,7 +1511,7 @@
               </div>
               <div class="mini-time">28m</div>
             </div>
-            
+
             <div class="mini-platform">
               <div class="mini-icon" style="background:#25d366">💬</div>
               <div class="mini-bar-wrap">
@@ -1515,12 +1520,12 @@
               </div>
               <div class="mini-time">52m</div>
             </div>
-            
+
             <div class="app-insight">
               <div class="insight-label">🧠 AI Insight</div>
               <div class="insight-text">TikTok is eating 38% of your daily screen time. Swap 45 min for LinkedIn learning to hit your Tech career goals faster.</div>
             </div>
-            
+
             <div class="app-score-row">
               <div class="score-card">
                 <div class="score-val" style="color:#5a8f7e">72</div>
@@ -1537,13 +1542,13 @@
             </div>
           </div>
         </div>
-        
+
         <div class="float-card float-1">
           <div class="float-label">Weekly Streak</div>
           <div class="float-value">🔥 14 days</div>
           <div class="float-sub">Below your target usage</div>
         </div>
-        
+
         <div class="float-card float-2">
           <div class="float-label">Saved this week</div>
           <div class="float-value">3h 40m</div>
@@ -1560,79 +1565,79 @@
       <div class="marquee-item">
         <span class="mq-icon" style="background:#0077b5;">
           <svg viewBox="0 0 24 24" fill="white" width="16" height="16">
-            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
           </svg>
-        </span> 
+        </span>
         LinkedIn
       </div>
-      
+
       <!-- Instagram -->
       <div class="marquee-item">
         <span class="mq-icon" style="background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);">
           <svg viewBox="0 0 24 24" fill="white" width="16" height="16">
-            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
           </svg>
-        </span> 
+        </span>
         Instagram
       </div>
-      
+
       <!-- TikTok -->
       <div class="marquee-item">
         <span class="mq-icon" style="background:#111;">
           <svg viewBox="0 0 24 24" fill="white" width="16" height="16">
-            <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/>
+            <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z" />
           </svg>
-        </span> 
+        </span>
         TikTok
       </div>
-      
+
       <!-- X / Twitter -->
       <div class="marquee-item">
         <span class="mq-icon" style="background:#000;">
           <svg viewBox="0 0 24 24" fill="white" width="16" height="16">
-            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.261 5.632 5.903-5.632zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/>
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.261 5.632 5.903-5.632zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z" />
           </svg>
-        </span> 
+        </span>
         X / Twitter
       </div>
-      
+
       <!-- WhatsApp -->
       <div class="marquee-item">
         <span class="mq-icon" style="background:#25d366;">
           <svg viewBox="0 0 24 24" fill="white" width="16" height="16">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z" />
           </svg>
-        </span> 
+        </span>
         WhatsApp
       </div>
-      
+
       <!-- Facebook -->
       <div class="marquee-item">
         <span class="mq-icon" style="background:#1877f2;">
           <svg viewBox="0 0 24 24" fill="white" width="16" height="16">
-            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
           </svg>
-        </span> 
+        </span>
         Facebook
       </div>
-      
+
       <!-- Threads -->
       <div class="marquee-item">
         <span class="mq-icon" style="background:#111;">
           <svg viewBox="0 0 24 24" fill="white" width="16" height="16">
-            <path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.5 12.068c0-3.516.85-6.37 2.495-8.423C5.845 1.341 8.598.16 12.18.136h.014c3.162.022 5.63 1.03 7.335 2.997 1.698 1.96 2.561 4.72 2.561 8.2 0 3.48-.863 6.24-2.561 8.2-1.705 1.968-4.173 2.974-7.335 2.997zm.055-22.862c-2.99.022-5.282.95-6.818 2.758-1.54 1.807-2.323 4.294-2.323 7.392 0 3.097.782 5.583 2.323 7.39 1.536 1.81 3.828 2.734 6.818 2.756 2.988-.022 5.279-.946 6.815-2.756 1.54-1.807 2.323-4.293 2.323-7.39 0-3.098-.782-5.585-2.323-7.392-1.536-1.808-3.827-2.736-6.815-2.758z"/>
+            <path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.5 12.068c0-3.516.85-6.37 2.495-8.423C5.845 1.341 8.598.16 12.18.136h.014c3.162.022 5.63 1.03 7.335 2.997 1.698 1.96 2.561 4.72 2.561 8.2 0 3.48-.863 6.24-2.561 8.2-1.705 1.968-4.173 2.974-7.335 2.997zm.055-22.862c-2.99.022-5.282.95-6.818 2.758-1.54 1.807-2.323 4.294-2.323 7.392 0 3.097.782 5.583 2.323 7.39 1.536 1.81 3.828 2.734 6.818 2.756 2.988-.022 5.279-.946 6.815-2.756 1.54-1.807 2.323-4.293 2.323-7.39 0-3.098-.782-5.585-2.323-7.392-1.536-1.808-3.827-2.736-6.815-2.758z" />
           </svg>
-        </span> 
+        </span>
         Threads
       </div>
-      
+
       <!-- Snapchat -->
       <div class="marquee-item">
         <span class="mq-icon" style="background:#FFFC00;filter:invert(1)">
           <svg viewBox="0 0 24 24" fill="white" width="16" height="16">
-            <path d="M12.166.009C9.484-.043 6.98 1.068 5.266 3.073 4.027 4.507 3.41 6.376 3.441 8.27l-.017 1.48-.73.265s.29.608.498.885c.116.154.33.306.475.389l-.112.267c-.474 1.142-1.222 2.006-2.277 2.566-.362.193-.54.385-.54.617 0 .359.42.644 1.254.844 1.012.242 1.526.477 1.699.847.088.193.072.431-.047.712-.304.717-1.105 1.2-2.153 1.587-.353.13-.489.278-.489.455 0 .267.318.549.881.716.463.138.917.183 1.21.378.24.161.334.44.376.682.123.715.48.862.91.862.261 0 .567-.084.922-.2.517-.168 1.225-.397 2.09-.397.504 0 1.04.067 1.594.214.82.218 1.6.893 2.512 1.447.565.342 1.087.48 1.587.48.5 0 1.022-.138 1.587-.48.912-.554 1.693-1.23 2.512-1.447.554-.147 1.09-.214 1.594-.214.865 0 1.573.229 2.09.397.355.116.661.2.922.2.43 0 .787-.147.91-.862.042-.242.136-.52.376-.682.293-.195.747-.24 1.21-.378.563-.167.881-.449.881-.716 0-.177-.136-.326-.489-.455-1.048-.387-1.849-.87-2.153-1.587-.119-.281-.135-.519-.047-.712.173-.37.687-.605 1.699-.847.834-.2 1.254-.485 1.254-.844 0-.232-.178-.424-.54-.617-1.055-.56-1.803-1.424-2.277-2.566l-.112-.267c.145-.083.359-.235.475-.389.208-.277.498-.885.498-.885l-.73-.265-.017-1.48C20.59 6.376 19.972 4.507 18.734 3.073 17.02 1.068 14.515-.042 12.166.009z"/>
+            <path d="M12.166.009C9.484-.043 6.98 1.068 5.266 3.073 4.027 4.507 3.41 6.376 3.441 8.27l-.017 1.48-.73.265s.29.608.498.885c.116.154.33.306.475.389l-.112.267c-.474 1.142-1.222 2.006-2.277 2.566-.362.193-.54.385-.54.617 0 .359.42.644 1.254.844 1.012.242 1.526.477 1.699.847.088.193.072.431-.047.712-.304.717-1.105 1.2-2.153 1.587-.353.13-.489.278-.489.455 0 .267.318.549.881.716.463.138.917.183 1.21.378.24.161.334.44.376.682.123.715.48.862.91.862.261 0 .567-.084.922-.2.517-.168 1.225-.397 2.09-.397.504 0 1.04.067 1.594.214.82.218 1.6.893 2.512 1.447.565.342 1.087.48 1.587.48.5 0 1.022-.138 1.587-.48.912-.554 1.693-1.23 2.512-1.447.554-.147 1.09-.214 1.594-.214.865 0 1.573.229 2.09.397.355.116.661.2.922.2.43 0 .787-.147.91-.862.042-.242.136-.52.376-.682.293-.195.747-.24 1.21-.378.563-.167.881-.449.881-.716 0-.177-.136-.326-.489-.455-1.048-.387-1.849-.87-2.153-1.587-.119-.281-.135-.519-.047-.712.173-.37.687-.605 1.699-.847.834-.2 1.254-.485 1.254-.844 0-.232-.178-.424-.54-.617-1.055-.56-1.803-1.424-2.277-2.566l-.112-.267c.145-.083.359-.235.475-.389.208-.277.498-.885.498-.885l-.73-.265-.017-1.48C20.59 6.376 19.972 4.507 18.734 3.073 17.02 1.068 14.515-.042 12.166.009z" />
           </svg>
-        </span> 
+        </span>
         Snapchat
       </div>
     </div>
@@ -1644,17 +1649,17 @@
       <div class="stat-num count-up" data-target="3.1" data-suffix="h">0</div>
       <div class="stat-lbl">Avg. hours/day lost to unstructured scrolling</div>
     </div>
-    
+
     <div class="stat-item reveal">
       <div class="stat-num count-up" data-target="6" data-suffix="">0</div>
       <div class="stat-lbl">Platforms tracked simultaneously</div>
     </div>
-    
+
     <div class="stat-item reveal">
       <div class="stat-num count-up" data-target="40" data-suffix="%">0</div>
       <div class="stat-lbl">% productivity uplift reported by beta users</div>
     </div>
-    
+
     <div class="stat-item reveal">
       <div class="stat-num" id="waitlist-stat-num">0</div>
       <div class="stat-lbl">Students & professionals on the waitlist</div>
@@ -1668,7 +1673,7 @@
       <h2 class="section-title">Not just tracking.<br><span class="accent">Intelligence.</span></h2>
       <p class="section-sub">Every feature is designed to connect your digital behavior to your academic and career outcomes.</p>
     </div>
-    
+
     <div class="features-grid">
       <!-- Feature 1 -->
       <div class="feature-card reveal">
@@ -1683,7 +1688,7 @@
           <span class="platform-chip">Desktop</span>
         </div>
       </div>
-      
+
       <!-- Feature 2 -->
       <div class="feature-card reveal">
         <div class="feature-number">02</div>
@@ -1697,7 +1702,7 @@
           <span class="platform-chip">Business</span>
         </div>
       </div>
-      
+
       <!-- Feature 3 -->
       <div class="feature-card reveal">
         <div class="feature-number">03</div>
@@ -1710,7 +1715,7 @@
           <span class="platform-chip">Reports</span>
         </div>
       </div>
-      
+
       <!-- Feature 4 -->
       <div class="feature-card reveal">
         <div class="feature-number">04</div>
@@ -1723,7 +1728,7 @@
           <span class="platform-chip">JWT Auth</span>
         </div>
       </div>
-      
+
       <!-- Feature 5 -->
       <div class="feature-card reveal">
         <div class="feature-number">05</div>
@@ -1736,7 +1741,7 @@
           <span class="platform-chip">Goals</span>
         </div>
       </div>
-      
+
       <!-- Feature 6 -->
       <div class="feature-card reveal">
         <div class="feature-number">06</div>
@@ -1760,7 +1765,7 @@
         <h2 class="section-title" style="color:var(--ink);">Your career.<br><span style="color:var(--sage);">Your rules.</span></h2>
         <p class="section-sub" style="color:var(--muted); margin:0;">SynapseFlow adapts its guidance to your specific discipline.</p>
       </div>
-      
+
       <div class="disciplines-grid">
         <!-- Law -->
         <div class="discipline-card reveal">
@@ -1769,7 +1774,7 @@
           <div class="disc-insight">Limit distraction during case prep. Leverage LinkedIn for networking. Protect deep work blocks during reading periods.</div>
           <span class="disc-tag">Deep focus mode</span>
         </div>
-        
+
         <!-- Technology -->
         <div class="discipline-card reveal">
           <div class="disc-emoji">💻</div>
@@ -1777,7 +1782,7 @@
           <div class="disc-insight">Balance X/Twitter for dev news and TikTok for tutorials. Optimize LinkedIn engagement for job hunting season.</div>
           <span class="disc-tag">Dev-optimized</span>
         </div>
-        
+
         <!-- Medicine -->
         <div class="discipline-card reveal">
           <div class="disc-emoji">🏥</div>
@@ -1785,7 +1790,7 @@
           <div class="disc-insight">Strict distraction boundaries during study blocks. Track professional development content vs entertainment ratio.</div>
           <span class="disc-tag">Study guardian</span>
         </div>
-        
+
         <!-- Business -->
         <div class="discipline-card reveal">
           <div class="disc-emoji">📊</div>
@@ -1793,7 +1798,7 @@
           <div class="disc-insight">Maximize LinkedIn ROI for networking. Track time on financial news vs scrolling. Build a personal brand schedule.</div>
           <span class="disc-tag">Network booster</span>
         </div>
-        
+
         <!-- Creative -->
         <div class="discipline-card reveal">
           <div class="disc-emoji">🎨</div>
@@ -1801,7 +1806,7 @@
           <div class="disc-insight">Instagram and Pinterest for inspiration have diminishing returns. SynapseFlow signals when browsing turns unproductive.</div>
           <span class="disc-tag">Inspiration tracker</span>
         </div>
-        
+
         <!-- Education -->
         <div class="discipline-card reveal">
           <div class="disc-emoji">🎓</div>
@@ -1809,7 +1814,7 @@
           <div class="disc-insight">Protect writing and research hours. Identify peak academic focus windows and schedule social media in off-peak slots.</div>
           <span class="disc-tag">Research shield</span>
         </div>
-        
+
         <!-- Marketing -->
         <div class="discipline-card reveal">
           <div class="disc-emoji">📣</div>
@@ -1817,7 +1822,7 @@
           <div class="disc-insight">Social media is your job — but passive scrolling isn't. SynapseFlow helps you separate professional use from distraction.</div>
           <span class="disc-tag">Work vs scroll</span>
         </div>
-        
+
         <!-- Other -->
         <div class="discipline-card reveal">
           <div class="disc-emoji">🌍</div>
@@ -1836,7 +1841,7 @@
         <div class="section-tag" style="color:var(--sage); font-family:var(--font-mono); font-size:.68rem; letter-spacing:.2em; text-transform:uppercase; margin-bottom:16px;">// Product Roadmap</div>
         <h2 class="section-title" style="font-family:var(--font-display); font-size:clamp(2.5rem,5vw,4rem); letter-spacing:.04em; line-height:1; color:var(--ink);">What's<br><span style="color:var(--sage);">Coming.</span></h2>
       </div>
-      
+
       <div class="timeline-items">
         <!-- Timeline Item 1 -->
         <div class="timeline-item reveal">
@@ -1845,7 +1850,7 @@
           <div class="tl-title">Automatic Tracking Integration</div>
           <div class="tl-desc">Android UsageStatsManager and iOS Screen Time APIs live. Browser extension for desktop/web tracking. OAuth integrations with LinkedIn and X where available. GDPR compliance audit complete.</div>
         </div>
-        
+
         <!-- Timeline Item 2 -->
         <div class="timeline-item reveal">
           <div class="timeline-dot"></div>
@@ -1853,7 +1858,7 @@
           <div class="tl-title">AI Engine + Personalization</div>
           <div class="tl-desc">Machine learning replaces rule-based recommendations. Behavioral prediction models. Focus Score gamification, streaks, and milestone system. Push notifications and smart nudges.</div>
         </div>
-        
+
         <!-- Timeline Item 3 -->
         <div class="timeline-item reveal">
           <div class="timeline-dot"></div>
@@ -1861,7 +1866,7 @@
           <div class="tl-title">Institution Dashboards & Premium</div>
           <div class="tl-desc">University and corporate team dashboards. Premium analytics subscription tier. Full social media API integrations. Habit-building programs and cohort challenges.</div>
         </div>
-        
+
         <!-- Timeline Item 4 -->
         <div class="timeline-item reveal">
           <div class="timeline-dot"></div>
@@ -1878,16 +1883,16 @@
     <div class="final-tag">// Join the waitlist</div>
     <h2 class="final-title">Be first.<br><span class="accent">Flow smarter.</span></h2>
     <p class="final-sub">Early access spots are limited. Join the waitlist and get priority access when we launch, plus exclusive beta features.</p>
-    
+
     <form class="final-form" id="footer-form" onsubmit="submitForm(event, 'footer')">
       <input class="final-input" type="email" placeholder="Your email address" required id="footer-email">
       <button class="final-btn" type="submit" id="footer-btn">Get Early Access →</button>
     </form>
-    
+
     <div style="display:none; text-align:center; margin-top:20px;" id="footer-success">
       <div style="color:var(--sage-pale); font-size:1rem;">🎉 You're on the list — a confirmation email has been sent to your inbox!</div>
     </div>
-    
+
     <div style="margin-top:40px; font-size:.72rem; color:rgba(255,255,255,.2); letter-spacing:.1em;">
       Available on Web · Android · iOS · Windows · macOS
     </div>
@@ -1907,6 +1912,11 @@
   </footer>
 
   <script>
+    // ========== SUPABASE INIT (using unique variable name) ==========
+    const SUPABASE_URL = 'https://xbfxlzkhjvgahofitdba.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhiZnhsemtoanZnYWhvaWZ0ZGJhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIyMTYyMjAsImV4cCI6MjA4Nzc5MjIyMH0.EYvB3cnKjJEgn-fRLeN4n255zmj0-Gt-r6DTFBS5_8I';
+    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
     // ========== EMAILJS CHECK ==========
     let emailjsReady = false;
     if (typeof emailjs !== 'undefined') {
@@ -1916,11 +1926,6 @@
     } else {
       console.error('EmailJS library failed to load – email confirmations disabled');
     }
-
-    // ========== SUPABASE INIT (ONCE) ==========
-    const SUPABASE_URL = 'https://xbfxlzkhjvgahofitdba.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhiZnhsemtoanZnYWhvaWZ0ZGJhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIyMTYyMjAsImV4cCI6MjA4Nzc5MjIyMH0.EYvB3cnKjJEgn-fRLeN4n255zmj0-Gt-r6DTFBS5_8I';
-    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     // ========== CURSOR ==========
     const cursor = document.getElementById('cursor');
@@ -1969,7 +1974,7 @@
     // ========== FETCH WAITLIST COUNT FROM SUPABASE ==========
     async function updateWaitlistCount() {
       try {
-        const { count, error } = await supabase
+        const { count, error } = await supabaseClient
           .from('waitlist')
           .select('*', { count: 'exact', head: true });
         if (error) throw error;
@@ -1983,7 +1988,7 @@
 
     // ========== INSERT INTO SUPABASE ==========
     async function addToSupabase(data) {
-      const { error } = await supabase
+      const { error } = await supabaseClient
         .from('waitlist')
         .insert([{
           email: data.email,
@@ -2058,7 +2063,7 @@
       }
     }
 
-    // ========== SCROLL REVEAL ==========
+    
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
         if (entry.isIntersecting) {
@@ -2069,7 +2074,6 @@
 
     document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-    // ========== COUNT-UP ANIMATION (excluding the waitlist stat) ==========
     const countObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {

@@ -12,11 +12,8 @@
   <!-- Supabase client library -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   
-  <!-- EmailJS -->
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" async></script>
-  <script>
-    emailjs.init("BA6fdFhXWv457hgU1");
-  </script>
+  <!-- EmailJS (loaded synchronously to avoid tracking prevention issues) -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   
   <style>
     /* ========== CSS RESET & VARIABLES ========== */
@@ -1910,9 +1907,19 @@
   </footer>
 
   <script>
-    // ========== SUPABASE INIT (REPLACE WITH YOUR CREDENTIALS) ==========
-    const SUPABASE_URL = 'https://xbfxlzkhjvgahoiftdba.supabase.co';   // <-- REPLACE THIS
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhiZnhsemtoanZnYWhvaWZ0ZGJhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIyMTYyMjAsImV4cCI6MjA4Nzc5MjIyMH0.EYvB3cnKjJEgn-fRLeN4n255zmj0-Gt-r6DTFBS5_8I';                 // <-- REPLACE THIS
+    // ========== EMAILJS CHECK ==========
+    let emailjsReady = false;
+    if (typeof emailjs !== 'undefined') {
+      emailjs.init("BA6fdFhXWv457hgU1");
+      emailjsReady = true;
+      console.log('EmailJS initialized');
+    } else {
+      console.error('EmailJS library failed to load – email confirmations disabled');
+    }
+
+    // ========== SUPABASE INIT (ONCE) ==========
+    const SUPABASE_URL = 'https://xbfxlzkhjvgahofitdba.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhiZnhsemtoanZnYWhvaWZ0ZGJhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIyMTYyMjAsImV4cCI6MjA4Nzc5MjIyMH0.EYvB3cnKjJEgn-fRLeN4n255zmj0-Gt-r6DTFBS5_8I';
     const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     // ========== CURSOR ==========
@@ -1989,8 +1996,12 @@
       await updateWaitlistCount(); // refresh count
     }
 
-    // ========== EMAIL SENDING (EmailJS) ==========
+    // ========== EMAIL SENDING (with fallback) ==========
     function sendEmail(userData) {
+      if (!emailjsReady) {
+        console.warn('EmailJS not available – skipping email');
+        return Promise.reject('EmailJS not loaded');
+      }
       return emailjs.send('synapseflow_service', 'template_vodkbon', {
         firstName: userData.firstName || '',
         lastName: userData.lastName || '',
@@ -2022,12 +2033,17 @@
       try {
         // 1. Insert into Supabase
         await addToSupabase(data);
-        // 2. Send email (optional – you can remove this block if not needed)
-        await sendEmail(data);
-        console.log('✅ Email sent');
+        // 2. Try to send email (don't block on failure)
+        try {
+          await sendEmail(data);
+          console.log('✅ Email sent');
+        } catch (emailErr) {
+          console.error('Email sending failed (proceeding anyway):', emailErr);
+        }
       } catch (error) {
-        console.error('Error:', error);
-        // Still show success to the user? Decide.
+        console.error('Error saving to database:', error);
+        alert('Something went wrong. Please try again later.');
+        return;
       }
 
       // 3. Show success message
@@ -2035,7 +2051,7 @@
         document.getElementById('main-form').style.display = 'none';
         document.getElementById('main-success').classList.add('visible');
         document.getElementById('main-success-sub').textContent = 
-          'Thanks for joining! A confirmation email is on its way.';
+          'Thanks for joining! Your spot is reserved.';
       } else {
         document.getElementById('footer-form').style.display = 'none';
         document.getElementById('footer-success').style.display = 'block';

@@ -1057,7 +1057,7 @@ footer {
     <div class="stat-lbl">% productivity uplift reported by beta users</div>
   </div>
   <div class="stat-item reveal">
-    <div class="stat-num count-up" data-target="2847" data-suffix="">0</div>
+    <div class="stat-num count-up" data-target="15" data-suffix="">0</div>
     <div class="stat-lbl">Students & professionals on the waitlist</div>
   </div>
 </div>
@@ -1211,27 +1211,27 @@ footer {
     <div class="timeline-items">
       <div class="timeline-item reveal">
         <div class="timeline-dot active"></div>
-        <div class="tl-phase">Now — Q3 2025</div>
-        <div class="tl-title">MVP Launch — Waitlist & Core App</div>
-        <div class="tl-desc">User authentication, field selection, manual usage input, daily/weekly averages, rule-based productivity recommendations, and the core analytics dashboard. Flutter app across Android, iOS, Web.</div>
-      </div>
-      <div class="timeline-item reveal">
-        <div class="timeline-dot"></div>
-        <div class="tl-phase">Q4 2025</div>
+        <div class="tl-phase">Q2 2026</div>
         <div class="tl-title">Automatic Tracking Integration</div>
         <div class="tl-desc">Android UsageStatsManager and iOS Screen Time APIs live. Browser extension for desktop/web tracking. OAuth integrations with LinkedIn and X where available. GDPR compliance audit complete.</div>
       </div>
       <div class="timeline-item reveal">
         <div class="timeline-dot"></div>
-        <div class="tl-phase">Q1 2026</div>
+        <div class="tl-phase">Q3 2026</div>
         <div class="tl-title">AI Engine + Personalization</div>
         <div class="tl-desc">Machine learning replaces rule-based recommendations. Behavioral prediction models. Focus Score gamification, streaks, and milestone system. Push notifications and smart nudges.</div>
       </div>
       <div class="timeline-item reveal">
         <div class="timeline-dot"></div>
-        <div class="tl-phase">Q2–Q3 2026</div>
+        <div class="tl-phase">Q4 2026</div>
         <div class="tl-title">Institution Dashboards & Premium</div>
         <div class="tl-desc">University and corporate team dashboards. Premium analytics subscription tier. Full social media API integrations. Habit-building programs and cohort challenges.</div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="tl-phase">Q1 2027</div>
+        <div class="tl-title">MVP Launch - Core App</div>
+        <div class="tl-desc">The first version of SynapseFlow is ready for public release. Core tracking, analytics, and personalization features are live.</div>
       </div>
     </div>
   </div>
@@ -1264,7 +1264,7 @@ footer {
     <a href="#" class="footer-link">Twitter / X</a>
     <a href="#" class="footer-link">LinkedIn</a>
   </div>
-  <div class="footer-copy">© 2025 SynapseFlow. All rights reserved.</div>
+  <div class="footer-copy">© 2026 SynapseFlow. All rights reserved.</div>
 </footer>
 
 <script>
@@ -1303,7 +1303,7 @@ function updateAppClock() {
 setInterval(updateAppClock, 10000);
 updateAppClock();
 
-let waitlistCount = 2847;
+let waitlistCount = 15;
 function bumpWaitlist() {
   if (Math.random() < 0.3) {
     waitlistCount++;
@@ -1313,8 +1313,21 @@ function bumpWaitlist() {
 }
 setInterval(bumpWaitlist, 8000);
 
-function simulateSendEmail(userData) {
-  console.log('📧 Email sent to:', userData.email, 'with data:', userData);
+function sendEmail(userData) {
+  const templateParams = {
+    firstName: userData.firstName || '',
+    lastName: userData.lastName || '',
+    email: userData.email,
+    discipline: userData.discipline || 'Not specified',
+    platformFocus: userData.platformFocus || 'Not specified',
+    message: `Thank you for joining the SynapseFlow waitlist! We'll notify you when early access opens.`
+  };
+
+  return emailjs.send(
+    'synapseflow_service',
+    'template_vodkbon',
+    templateParams
+  );
 }
 
 function submitForm(e, formId) {
@@ -1349,30 +1362,34 @@ function submitForm(e, formId) {
 
   const position = existing.length;
 
-  simulateSendEmail(data);
+  if (!isDupe) {
+    sendEmail(data)
+      .then(response => {
+        console.log('✅ Email sent successfully!', response.status, response.text);
+      })
+      .catch(error => {
+        console.error('❌ Failed to send email:', error);
+      });
+  } else {
+    console.log('Duplicate entry, email not sent.');
+  }
 
-function sendEmail(userData) {
-  const templateParams = {
-    firstName: userData.firstName || '',
-    lastName: userData.lastName || '',
-    email: userData.email,
-    discipline: userData.discipline || 'Not specified',
-    platformFocus: userData.platformFocus || 'Not specified',
-    message: `Thank you for joining the SynapseFlow waitlist! We'll notify you when early access opens.`
-  };
-
-  emailjs.send(
-    'synapseflow_service',
-    'template_vodkbon',
-    templateParams
-  )
-  .then(function(response) {
-    console.log('✅ Email sent successfully!', response.status, response.text);
-  })
-  .catch(function(error) {
-    console.error('❌ Failed to send email:', error);
-  });
-}
+  if (formId === 'main') {
+    document.getElementById('main-form').style.display = 'none';
+    const successEl = document.getElementById('main-success');
+    successEl.classList.add('visible');
+    const subEl = document.getElementById('main-success-sub');
+    if (isDupe) {
+      subEl.textContent = 'You were already on the list. Welcome back!';
+    } else {
+      subEl.textContent = 'We\'ll notify you the moment early access opens. A confirmation email has been sent to your inbox.';
+    }
+    document.getElementById('success-position').textContent =
+      isDupe ? '' : `You are #${position.toLocaleString()} on the waitlist.`;
+  } else {
+    document.getElementById('footer-form').style.display = 'none';
+    document.getElementById('footer-success').style.display = 'block';
+  }
 }
 
 const revealObserver = new IntersectionObserver((entries) => {
@@ -1402,8 +1419,11 @@ const countObserver = new IntersectionObserver((entries) => {
         el.textContent = isLarge
           ? Math.round(current).toLocaleString()
           : (isDecimal ? current.toFixed(1) : Math.round(current));
-        if (progress < 1) requestAnimationFrame(update);
-        else el.textContent = (isLarge ? target.toLocaleString() : (isDecimal ? target.toFixed(1) : Math.round(target))) + suffix;
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        } else {
+          el.textContent = (isLarge ? target.toLocaleString() : (isDecimal ? target.toFixed(1) : Math.round(target))) + suffix;
+        }
       }
       requestAnimationFrame(update);
       countObserver.unobserve(el);

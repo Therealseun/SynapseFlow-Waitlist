@@ -9,7 +9,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <style>
-    /* ---------- RESET & VARIABLES ---------- */
+    
     *, *::after, *::before {
       box-sizing: border-box;
       margin: 0;
@@ -42,7 +42,7 @@
       overflow-x: hidden;
     }
 
-    /* ---------- CUSTOM CURSOR ---------- */
+    
     @media (hover: hover) and (pointer: fine) {
       body {
         cursor: none;
@@ -82,7 +82,7 @@
       }
     }
 
-    /* ---------- NOISE OVERLAY ---------- */
+    
     body::before {
       content: '';
       position: fixed;
@@ -93,7 +93,7 @@
       opacity: 0.6;
     }
 
-    /* ---------- NAVIGATION ---------- */
+    
     nav {
       position: fixed;
       top: 0;
@@ -167,7 +167,7 @@
       transform: translateY(-1px);
     }
 
-    /* ---------- HERO SECTION ---------- */
+    
     .hero {
       min-height: 100vh;
       display: grid;
@@ -299,7 +299,7 @@
       animation: fadeUp 0.8s 0.3s both;
     }
 
-    /* ---------- WAITLIST FORM ---------- */
+    
     .waitlist-form-wrap {
       animation: fadeUp 0.8s 0.4s both;
     }
@@ -415,7 +415,7 @@
       flex-shrink: 0;
     }
 
-    /* ---------- SUCCESS MESSAGE ---------- */
+    
     .success-msg {
       display: none;
       background: rgba(61, 107, 94, 0.08);
@@ -456,7 +456,7 @@
       margin-top: 12px;
     }
 
-    /* ---------- SOCIAL PROOF ---------- */
+    
     .social-proof {
       display: flex;
       align-items: center;
@@ -517,7 +517,7 @@
       font-weight: 500;
     }
 
-    /* ---------- HERO RIGHT (PHONE MOCKUP) ---------- */
+    
     .hero-right {
       position: relative;
       display: flex;
@@ -693,7 +693,7 @@
       margin-top: 2px;
     }
 
-    /* ---------- FLOATING CARDS ---------- */
+    
     .float-card {
       position: absolute;
       background: #fff;
@@ -756,7 +756,7 @@
       margin-top: 4px;
     }
 
-    /* ---------- FEATURES SECTION ---------- */
+    
     .section-features {
       padding: 120px 80px;
       background: var(--ink);
@@ -905,7 +905,7 @@
       letter-spacing: 0.05em;
     }
 
-    /* ---------- DISCIPLINES SECTION ---------- */
+    
     .section-disciplines {
       padding: 120px 80px;
       background: var(--cream);
@@ -962,7 +962,7 @@
       border-radius: 100px;
     }
 
-    /* ---------- STATS SECTION ---------- */
+    
     .section-stats {
       padding: 80px;
       background: var(--sage);
@@ -997,7 +997,7 @@
       font-weight: 300;
     }
 
-    /* ---------- TIMELINE SECTION ---------- */
+    
     .section-timeline {
       padding: 120px 80px;
       background: var(--paper);
@@ -1078,7 +1078,7 @@
       font-weight: 300;
     }
 
-    /* ---------- FINAL CTA SECTION ---------- */
+    
     .section-final-cta {
       background: var(--ink);
       color: #fff;
@@ -1174,7 +1174,7 @@
       background: var(--sage-light);
     }
 
-    /* ---------- FOOTER ---------- */
+    
     footer {
       background: var(--ink);
       border-top: 1px solid rgba(255, 255, 255, 0.06);
@@ -1218,7 +1218,7 @@
       color: rgba(255, 255, 255, 0.2);
     }
 
-    /* ---------- MARQUEE ---------- */
+    
     .platforms-marquee-wrap {
       overflow: hidden;
       background: var(--cream);
@@ -1262,7 +1262,7 @@
       font-size: 1rem;
     }
 
-    /* ---------- ANIMATIONS ---------- */
+    
     @keyframes fadeUp {
       0% {
         opacity: 0;
@@ -1278,7 +1278,7 @@
       display: inline-block;
     }
 
-    /* ---------- MOBILE RESPONSIVE ---------- */
+    
     @media (max-width: 768px) {
       nav {
         padding: 16px 24px;
@@ -1338,7 +1338,7 @@
       }
     }
 
-    /* ---------- SCROLL REVEAL ---------- */
+    
     .reveal {
       opacity: 0;
       transform: translateY(30px);
@@ -1880,12 +1880,12 @@
   </footer>
 
   <script>
-    // ========== SUPABASE INIT (using unique variable name) ==========
+    
     const SUPABASE_URL = 'https://xbfxlzkhjvgahoiftdba.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhiZnhsemtoanZnYWhvaWZ0ZGJhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIyMTYyMjAsImV4cCI6MjA4Nzc5MjIyMH0.EYvB3cnKjJEgn-fRLeN4n255zmj0-Gt-r6DTFBS5_8I';
     const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    // ========== EMAILJS CHECK ==========
+    
     let emailjsReady = false;
     if (typeof emailjs !== 'undefined') {
       emailjs.init("BA6fdFhXWv457hgU1");
@@ -1895,7 +1895,7 @@
       console.error('EmailJS library failed to load – email confirmations disabled');
     }
 
-    // ========== CURSOR ==========
+    
     const cursor = document.getElementById('cursor');
     const ring = document.getElementById('cursor-ring');
     let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
@@ -1929,7 +1929,7 @@
       });
     }
 
-    // ========== CLOCK ==========
+    
     function updateAppClock() {
       const now = new Date();
       document.getElementById('app-clock').textContent = 
@@ -1939,7 +1939,7 @@
     setTimeout(updateAppClock, 0);
     setInterval(updateAppClock, 10000);
 
-    // ========== FETCH WAITLIST COUNT FROM SUPABASE ==========
+    
     async function updateWaitlistCount() {
       try {
         const { count, error } = await supabaseClient
@@ -1954,7 +1954,7 @@
     }
     updateWaitlistCount();
 
-    // ========== CHECK IF EMAIL EXISTS (handles multiple rows) ==========
+    
     async function emailExists(email) {
       const { data, error } = await supabaseClient
         .from('waitlist')
@@ -1965,7 +1965,7 @@
       return data && data.length > 0;
     }
 
-    // ========== INSERT INTO SUPABASE ==========
+    
     async function addToSupabase(data) {
       const { error } = await supabaseClient
         .from('waitlist')
@@ -1977,10 +1977,10 @@
           platform_focus: data.platformFocus || null
         }]);
       if (error) throw error;
-      await updateWaitlistCount(); // refresh count
+      await updateWaitlistCount();
     }
 
-    // ========== EMAIL SENDING (with fallback) ==========
+    
     function sendEmail(userData) {
       if (!emailjsReady) {
         console.warn('EmailJS not available – skipping email');
@@ -1995,7 +1995,7 @@
       });
     }
 
-    // ========== FORM SUBMISSION ==========
+    
     async function submitForm(e, formId) {
       e.preventDefault();
 
@@ -2015,10 +2015,10 @@
       }
 
       try {
-        // Check if email already registered
+        
         const exists = await emailExists(data.email);
         if (exists) {
-          // Show already registered message
+          
           if (formId === 'main') {
             document.getElementById('main-form').style.display = 'none';
             document.getElementById('main-success').classList.add('visible');
@@ -2034,10 +2034,10 @@
           return;
         }
 
-        // Insert into Supabase
+        
         await addToSupabase(data);
 
-        // Try to send email (don't block on failure)
+        
         try {
           await sendEmail(data);
           console.log('✅ Email sent');
@@ -2045,7 +2045,7 @@
           console.error('Email sending failed (proceeding anyway):', emailErr);
         }
 
-        // Show success message
+        
         if (formId === 'main') {
           document.getElementById('main-form').style.display = 'none';
           document.getElementById('main-success').classList.add('visible');
